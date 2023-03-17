@@ -1,0 +1,22 @@
+services:
+  Bot:
+    restart: always
+    container_name: TBM_CPU
+    image: rabbyt/nodejs-discord
+    environment:
+      - TZ= Europe/Paris
+    volumes:
+      - data:/data
+      - git:/git:ro
+    command: 
+        - bash
+        - -c
+        - >
+          rm -r /data;
+          git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data;
+          cp /git/config.json /data/config.json;
+          mv /data/Commands /data/commands;
+          nodejs index.js;
+volumes:
+  data: {}  
+  git: {}
