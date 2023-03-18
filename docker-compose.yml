@@ -1,10 +1,16 @@
 services:
   Bot:
-    restart: always
     container_name: TBM_CPU
-    image: rabbyt/nodejs-discord
+    image: node:19.8.1
+    restart: unless-stopped
+    labels:
+     - "traefik.enable=true"
+     - "traefik.http.routers.minecraft_test.rule=Host(`tbmpqf.laura-et-nicolas.com`)"
+     - "traefik.http.routers.minecraft_test.entrypoints=web"
     environment:
       - TZ= Europe/Paris
+    networks:
+      - web
     volumes:
       - data:/data
       - git:/git:ro
@@ -17,6 +23,9 @@ services:
           cp /git/config.json /data/config.json;
           mv /data/Commands /data/commands;
           nodejs index.js;
+networks:
+    web:
+      external: true
 volumes:
   data: {}  
   git: {}
