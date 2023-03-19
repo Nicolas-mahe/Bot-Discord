@@ -24,7 +24,7 @@ services:
           git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data;
           cp /git/config.json /data/config.json;
           cd /data;
-          git checkout 29b5af6a516b2c60a379c4b04865328885d58f13;
+          git checkout $COMMIT-REF;
           mv /data/Commands /data/commands;
           nodejs index.js;
 networks:
