@@ -4,9 +4,11 @@ services:
     image: node:19.8.1
     restart: unless-stopped
     labels:
-     - "traefik.enable=true"
-     - "traefik.http.routers.minecraft_test.rule=Host(`tbmpqf.laura-et-nicolas.com`)"
-     - "traefik.http.routers.minecraft_test.entrypoints=web"
+      - "traefik.enable=true"
+      - "traefik.http.routers.bot.rule=Host(`bot.laura-et-nicolas.com`)"
+      - "traefik.http.routers.bot.entrypoints=websecure"
+      - "traefik.http.routers.bot.tls=true"
+      - "traefik.http.routers.bot.tls.certresolver=cloudflare"
     environment:
       - TZ= Europe/Paris
     networks:
