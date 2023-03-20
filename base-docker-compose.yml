@@ -15,9 +15,10 @@ services:
       - web
     volumes:
       - data:/data
+    command: 
+        - "-up"
 networks:
     web:
       external: true
 volumes:
-  data: {}  
-  git: {}
+  data: {} 
