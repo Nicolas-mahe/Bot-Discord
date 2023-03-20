@@ -1,11 +1,8 @@
-FROM node:latest
+FROM ubuntu:22.04
 
-# Create the bot's directory
-RUN mkdir -p /data && \
-    mkdir -p /git
+RUN apt-get update && \
+    apt-get --no-cache docker-compose && \
+    apt-get git
 
 WORKDIR /data
 COPY . .
-
-# Start the bot.
-CMD ["node", "index.js"]

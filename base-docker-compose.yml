@@ -1,0 +1,23 @@
+services:
+  Bot:
+    container_name: Public-bot
+    image: docker/compose:docker/compose:alpine-1.29.2
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bot.rule=Host(`bot.laura-et-nicolas.com`)"
+      - "traefik.http.routers.bot.entrypoints=websecure"
+      - "traefik.http.routers.bot.tls=true"
+      - "traefik.http.routers.bot.tls.certresolver=cloudflare"
+    environment:
+      - TZ= Europe/Paris
+    networks:
+      - web
+    volumes:
+      - data:/data
+networks:
+    web:
+      external: true
+volumes:
+  data: {}  
+  git: {}

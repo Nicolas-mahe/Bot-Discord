@@ -3,16 +3,8 @@ services:
     container_name: TBM_CPU
     image: node:19.8.1
     restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.bot.rule=Host(`bot.laura-et-nicolas.com`)"
-      - "traefik.http.routers.bot.entrypoints=websecure"
-      - "traefik.http.routers.bot.tls=true"
-      - "traefik.http.routers.bot.tls.certresolver=cloudflare"
     environment:
       - TZ= Europe/Paris
-    networks:
-      - web
     volumes:
       - data:/data
       - git:/git:ro
@@ -27,9 +19,6 @@ services:
           git checkout $COMMIT_REF;
           mv /data/Commands /data/commands;
           nodejs index.js;
-networks:
-    web:
-      external: true
 volumes:
   data: {}  
   git: {}
