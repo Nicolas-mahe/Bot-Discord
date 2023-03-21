@@ -25,7 +25,6 @@ services:
           cp /git/config.json /data/config.json;
           cd /data;
           git checkout $COMMIT_REF;
-          mv /data/Commands /data/commands;
           nodejs index.js;
 networks:
     web:
