@@ -29,7 +29,7 @@ services:
           git checkout $COMMIT_REF;
           nodejs index.js;
 networks:
-    web:
+    websecures:
       external: true
 volumes:
   data: {}  
