@@ -14,7 +14,7 @@ services:
     environment:
       - TZ= Europe/Paris
     networks:
-      - websecures
+      - websecure
     volumes:
       - data:/data
       - git:/git:ro
@@ -29,7 +29,7 @@ services:
           git checkout $COMMIT_REF;
           nodejs index.js;
 networks:
-    websecures:
+    websecure:
       external: true
 volumes:
   data: {}  
