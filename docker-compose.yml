@@ -8,13 +8,13 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.bot.rule=Host(`bot.laura-et-nicolas.com`)"
-      - "traefik.http.routers.bot.entrypoints=websecure"
+      - "traefik.http.routers.bot.entrypoints=web"
       - "traefik.http.routers.bot.tls=true"
       - "traefik.http.routers.bot.tls.certresolver=cloudflare"
     environment:
       - TZ= Europe/Paris
     networks:
-      - websecure
+      - web
     volumes:
       - data:/data
       - git:/git:ro
@@ -29,7 +29,7 @@ services:
           git checkout $COMMIT_REF;
           nodejs index.js;
 networks:
-    websecure:
+    web:
       external: true
 volumes:
   data: {}  
