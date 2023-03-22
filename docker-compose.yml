@@ -1,3 +1,5 @@
+version: "3"
+
 services:
   Bot:
     container_name: TBM_CPU
