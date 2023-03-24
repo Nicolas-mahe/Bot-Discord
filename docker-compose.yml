@@ -3,7 +3,7 @@ version: "3"
 services:
   Bot:
     container_name: TBM_CPU
-    image: node:lts
+    image: node:lts # 19.8.1 
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
