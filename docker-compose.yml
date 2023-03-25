@@ -5,12 +5,6 @@ services:
     container_name: TBM_CPU
     image: node:lts # 19.8.1 
     restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.bot.rule=Host(`bot.laura-et-nicolas.com`)"
-      - "traefik.http.routers.bot.entrypoints=web"
-      - "traefik.http.routers.bot.tls=true"
-      - "traefik.http.routers.bot.tls.certresolver=cloudflare"
     environment:
       - TZ= Europe/Paris
     networks:
