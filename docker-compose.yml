@@ -6,7 +6,7 @@ services:
     image: node:lts # 19.8.1 
     restart: unless-stopped
     labels:
-      traefik.http.services.monconteneur.loadbalancer.server.port: $PERSONNAL_PORT
+      traefik.http.services.cpu.loadbalancer.server.port: $PERSONNAL_PORT
       traefik.enable: true
       traefik.http.routers.cpu.tls: true
       traefik.http.routers.cpu.entrypoints: websecure
