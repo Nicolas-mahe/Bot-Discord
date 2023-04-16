@@ -31,7 +31,7 @@ services:
           cp /git/config.json /data/config.json;
           cd /data;
           git checkout $COMMIT_REF;
-          nodejs index.js;
+          nodejs --trace-deprecation index.js;
 networks:
     web:
       external: true
