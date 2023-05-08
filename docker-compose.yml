@@ -15,8 +15,6 @@ services:
       - TZ= Europe/Paris
     networks:
       - web
-    ports:
-      - $PERSONAL_PORT_CPU:80
     volumes:
       - data:/data
       - git:/git:ro
