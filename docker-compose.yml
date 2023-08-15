@@ -9,7 +9,7 @@ services:
       traefik.enable: true
       traefik.http.routers.cpu.tls: true
       traefik.http.routers.cpu.entrypoints: websecure
-      traefik.http.routers.cpu.rule: Host(`cpu.$PERSONAL_DOMAINE_NAME`)
+      traefik.http.routers.cpu.rule: Host(`cpu.${PERSONAL_DOMAINE_NAME}`)
       traefik.http.services.cpu.loadbalancer.server.port: 80
     environment:
       - TZ= Europe/Paris
@@ -28,7 +28,7 @@ services:
           git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data;
           cp /git/config.json /data/config.json;
           cd /data;
-          git checkout $COMMIT_REF;
+          git checkout ${COMMIT_REF};
           nodejs --trace-deprecation index.js;
 networks:
     web:
