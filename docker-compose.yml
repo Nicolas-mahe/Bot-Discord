@@ -12,7 +12,9 @@ services:
       traefik.http.routers.cpu.rule: Host(`cpu.${PERSONAL_DOMAINE_NAME}`)
       traefik.http.services.cpu.loadbalancer.server.port: 80
     environment:
-      - TZ= Europe/Paris
+      TZ: Europe/Paris
+      UID: ${PERSONAL_UID_CPU}
+      GID: ${PERSONAL_GID_CPU}
     networks:
       - web
     volumes:
