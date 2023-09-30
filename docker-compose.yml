@@ -25,12 +25,23 @@ services:
       - sh
       - -c
       - >
+        rm /data/* &&
         wget https://raw.githubusercontent.com/Nicolas-mahe/Bot-Discord/main/CreateConfig.sh -O /git/CreateConfig.sh &&
-        rm -rf /data/* && chmod +x /git/CreateConfig.sh && /git/CreateConfig.sh &&
+        chmod +x /git/CreateConfig.sh &&
+        /git/CreateConfig.sh &&
         cp /git/config.json /data/config.json &&
         apk update && apk add ffmpeg && apk add git &&
         git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data &&
         cd /data && git checkout ${COMMIT_REF} &&
+        echo '{
+          "token": "'${TOKEN}'",
+          "mongourl": "'${BDD_URL}'",
+          "serveurMinecraftDOMAIN": "'${PERSONAL_DOMAINE_NAME}'",
+          "twitch": {
+            "clientId": "'${TWITCH_ID}'",
+            "clientSecret": "'${TWITCH_SECRET}'"
+          }
+        }' > /data/config.json &&
         node --trace-deprecation index.js;
 networks:
     web:
