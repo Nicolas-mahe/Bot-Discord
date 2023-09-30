@@ -3,7 +3,7 @@ version: "3"
 services:
   Bot:
     container_name: TBM_CPU
-    image: node:lts # 19.8.1 
+    image: node:lts-alpine # lts ou 19.8.1 
     restart: no
     labels:
       traefik.enable: true
@@ -22,18 +22,16 @@ services:
       - git:/git:ro
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-    command: 
-        - bash
-        - -c
-        - >
-          apt update;
-          apt install ffmpeg -y;
-          rm -r /data;
-          git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data;
-          cp /git/config.json /data/config.json;
-          cd /data;
-          git checkout ${COMMIT_REF};
-          nodejs --trace-deprecation index.js;
+    command:
+      - sh
+      - -c
+      - >
+        rm -rf /data/* && apk update && apk add ffmpeg && apk add git &&
+        git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data &&
+        cp /git/config.json /data/config.json &&
+        cd /data &&
+        git checkout ${COMMIT_REF} &&
+        node --trace-deprecation index.js;
 networks:
     web:
       external: true
