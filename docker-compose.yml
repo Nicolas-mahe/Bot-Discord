@@ -27,7 +27,7 @@ services:
         apk update && apk add ffmpeg git &&
         git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data &&
         wget https://raw.githubusercontent.com/Nicolas-mahe/Bot-Discord/main/CreateConfig.sh -O /data/CreateConfig.sh &&
-        chmod +x /git/CreateConfig.sh && /git/CreateConfig.sh &&
+        chmod +x /data/CreateConfig.sh && /data/CreateConfig.sh &&
         cd /data && git checkout ${COMMIT_REF} &&
         node --trace-deprecation /data/index.js;
 networks:

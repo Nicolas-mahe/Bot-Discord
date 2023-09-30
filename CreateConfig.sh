@@ -1,5 +1,4 @@
-echo "Valeur de TOKEN : $TOKEN"
-cat << EOF > /git/config.json
+cat << EOF > ./config.json
 {
   "token": "$TOKEN",
   "mongourl": "$BDD_URL",
