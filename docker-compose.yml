@@ -14,11 +14,6 @@ services:
     environment:
       UID: ${PERSONAL_UID_CPU}
       GID: ${PERSONAL_GID_CPU}
-      TOKEN: ${TOKEN}
-      BDD_URL: ${BDD_URL}
-      TWITCH_ID: ${TWITCH_ID}
-      TWITCH_SECRET: ${TWITCH_SECRET}
-      PERSONAL_DOMAINE_NAME: ${PERSONAL_DOMAINE_NAME}
     networks:
       - web
     volumes:
