@@ -14,6 +14,11 @@ services:
     environment:
       UID: ${PERSONAL_UID_CPU}
       GID: ${PERSONAL_GID_CPU}
+      TOKEN: ${TOKEN}
+      BDD_URL: ${BDD_URL}
+      TWITCH_ID: ${TWITCH_ID}
+      TWITCH_SECRET: ${TWITCH_SECRET}
+      PERSONAL_DOMAINE_NAME: ${PERSONAL_DOMAINE_NAME}
     networks:
       - web
     volumes:
@@ -25,24 +30,14 @@ services:
       - sh
       - -c
       - >
-        rm /data/* &&
-        wget https://raw.githubusercontent.com/Nicolas-mahe/Bot-Discord/main/CreateConfig.sh -O /git/CreateConfig.sh &&
-        chmod +x /git/CreateConfig.sh &&
-        /git/CreateConfig.sh &&
-        cp /git/config.json /data/config.json &&
+        rm -rf /data/* &&
         apk update && apk add ffmpeg && apk add git &&
         git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data &&
         cd /data && git checkout ${COMMIT_REF} &&
-        echo '{
-          "token": "'${TOKEN}'",
-          "mongourl": "'${BDD_URL}'",
-          "serveurMinecraftDOMAIN": "'${PERSONAL_DOMAINE_NAME}'",
-          "twitch": {
-            "clientId": "'${TWITCH_ID}'",
-            "clientSecret": "'${TWITCH_SECRET}'"
-          }
-        }' > /data/config.json &&
-        node --trace-deprecation index.js;
+        chmod +x /git/CreateConfig.sh &&
+        /git/CreateConfig.sh &&
+        cp /git/config.json /data/config.json &&
+        node --trace-deprecation /data/index.js;
 networks:
     web:
       external: true

@@ -1,11 +1,11 @@
-cat << EOF > /git.config.json
+cat << EOF > /git/config.json
 {
-  "token": "$TOKEN",
-  "mongourl": "$BDD_URL",
-  "serveurMinecraftDOMAIN": "$PERSONAL_DOMAINE_NAME",
+  "token": "${TOKEN}",
+  "mongourl": "${BDD_URL}",
+  "serveurMinecraftDOMAIN": "${PERSONAL_DOMAINE_NAME}",
   "twitch": {
-    "clientId": "$TWITCH_ID",
-    "clientSecret": "$TWITCH_SECRET"
+    "clientId": "${TWITCH_ID}",
+    "clientSecret": "${TWITCH_SECRET}"
   }
 }
 EOF
