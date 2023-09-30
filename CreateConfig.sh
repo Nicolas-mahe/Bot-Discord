@@ -1,3 +1,4 @@
+echo "Valeur de TOKEN : $TOKEN"
 cat << EOF > /git/config.json
 {
   "token": "$TOKEN",

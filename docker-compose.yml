@@ -25,13 +25,13 @@ services:
       - sh
       - -c
       - >
-        rm -rf /data/* &&
-        apk update && apk add ffmpeg && apk add git &&
+        find /data/ -mindepth 1 -delete &&
+        apk update && apk add ffmpeg git &&
         git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data &&
         cd /data && git checkout ${COMMIT_REF} &&
-        chmod +x /git/CreateConfig.sh &&
-        /git/CreateConfig.sh &&
-        cp /git/config.json /data/config.json &&
+        wget https://raw.githubusercontent.com/Nicolas-mahe/Bot-Discord/main/CreateConfig.sh -O /git/CreateConfig.sh &&
+        chmod +x /git/CreateConfig.sh && /git/CreateConfig.sh && cp /git/config.json /data/config.json &&
+        echo "Valeur de domaine : $PERSONAL_DOMAINE_NAME" &&
         node --trace-deprecation /data/index.js;
 networks:
     web:
