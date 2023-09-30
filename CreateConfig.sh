@@ -1,6 +1,6 @@
 cat << EOF > /git.config.json
 {
-  "token": "$Token",
+  "token": "$TOKEN",
   "mongourl": "$BDD_URL",
   "serveurMinecraftDOMAIN": $PERSONAL_DOMAINE_NAME",
   "twitch": {
