@@ -2,7 +2,7 @@ version: '3'
 
 services:
   Bot:
-    container_name: CPU_TBM
+    container_name: TBM_CPU
     image: node:lts-alpine
     restart: unless-stopped
     labels:
