@@ -11,10 +11,8 @@ services:
       traefik.http.routers.cpu.entrypoints: websecure
       traefik.http.routers.cpu.rule: Host(`cpu.${PERSONAL_DOMAINE_NAME}`)
       traefik.http.services.cpu.loadbalancer.server.port: 80
-    networks:
-      - web
     volumes:
-      - data:/data
+      - /home/docker/tbm-cpu:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     env_file:
@@ -28,8 +26,3 @@ services:
         git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data &&
         cd /data && chmod +x ./CreateConfig.sh && ./CreateConfig.sh && git checkout ${COMMIT_REF} &&
         node --trace-deprecation /data/index.js;
-networks:
-    web:
-      external: true
-volumes:
-  data: {}
