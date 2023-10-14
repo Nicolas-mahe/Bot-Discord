@@ -26,3 +26,4 @@ services:
         git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data &&
         cd /data && chmod +x ./CreateConfig.sh && ./CreateConfig.sh && git checkout ${COMMIT_REF} &&
         node --trace-deprecation /data/index.js;
+    network_mode: bridge
