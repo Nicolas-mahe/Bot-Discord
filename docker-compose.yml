@@ -2,21 +2,16 @@ version: '3'
 
 services:
   Bot:
-    container_name: TBM_CPU
+    container_name: tbm_cpu
+    hostname: tbm_cpu
     image: node:lts-alpine
     restart: unless-stopped
-    labels:
-      traefik.enable: true
-      traefik.http.routers.cpu.tls: true
-      traefik.http.routers.cpu.entrypoints: websecure
-      traefik.http.routers.cpu.rule: Host(`cpu.${PERSONAL_DOMAINE_NAME}`)
-      traefik.http.services.cpu.loadbalancer.server.port: 80
+    env_file:
+      - stack.env
     volumes:
       - /home/docker/tbm-cpu:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-    env_file:
-      - stack.env
     command:
       - sh
       - -c
@@ -26,4 +21,9 @@ services:
         git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data &&
         cd /data && chmod +x ./CreateConfig.sh && ./CreateConfig.sh && git checkout ${COMMIT_REF} &&
         node --trace-deprecation /data/index.js;
-    network_mode: bridge
+    networks:
+    - web
+
+networks:
+  web:
+    external: true
