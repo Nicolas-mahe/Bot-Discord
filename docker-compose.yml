@@ -1,5 +1,5 @@
 # Run the line before the first run
-# git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data
+# git clone --progress --verbose https://github.com/TBMPQF/TBM_CPU_V2.git /data
 version: '3'
 
 services:
