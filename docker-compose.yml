@@ -1,29 +1,38 @@
+# Run the line before the first run
+# git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data
 version: '3'
 
 services:
-  Bot:
-    container_name: tbm_cpu
-    hostname: tbm_cpu
-    image: node:lts-alpine
+  bot:
     restart: unless-stopped
-    env_file:
-      - stack.env
+    image: node:lts-alpine
+    container_name: tbm-cpu
+    hostname: tbm-cpu
+    environment:
+      PUID: 1002
+      PGID: 100    
+      TZ: Europe/Paris
     volumes:
-      - /home/docker/tbm-cpu:/data
+      - tbm-cpu:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - stack.env
     command:
       - sh
       - -c
-      - >
-        find /data/ -mindepth 1 -delete &&
+      - > 
+        cd /data &&
         apk update && apk add ffmpeg git &&
-        git clone https://github.com/TBMPQF/TBM_CPU_V2.git /data &&
-        cd /data && chmod +x ./CreateConfig.sh && ./CreateConfig.sh && git checkout ${COMMIT_REF} &&
+        git pull origin main && git checkout ${COMMIT_REF}&&
+        chmod +x ./CreateConfig.sh && ./CreateConfig.sh &&
         node --trace-deprecation /data/index.js;
     networks:
-    - web
+    - tbm-cpu
 
+volumes:
+  tbm-cpu:
+    name: tbm_cpu
 networks:
-  web:
-    external: true
+  tbm-cpu:
+    name: tbm-cpu
