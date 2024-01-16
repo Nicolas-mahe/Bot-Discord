@@ -8,6 +8,9 @@ services:
     image: node:lts-alpine
     container_name: tbm-cpu
     hostname: tbm-cpu
+    labels:
+      diun.enable: true
+      diun.watch_repos: true
     environment:
       PUID: 1002
       PGID: 100    
