@@ -16,7 +16,7 @@ services:
       PGID: 100    
       TZ: Europe/Paris
     volumes:
-      - tbm-cpu:/data
+      - ./tbm-cpu:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     env_file:
@@ -25,10 +25,10 @@ services:
       - sh
       - -c
       - > 
-        cd /data &&
-        apk update && apk add ffmpeg git &&
-        git pull origin main && git checkout ${COMMIT_REF}&&
-        chmod +x ./CreateConfig.sh && ./CreateConfig.sh &&
+        find /data/ -mindepth 1 -delete &&
+        apk update && apk add ffmpeg git && git config --global --add safe.directory /data &&
+        git clone --progress --verbose https://github.com/TBMPQF/TBM_CPU_V2.git /data &&
+        cd /data && chmod +x ./CreateConfig.sh && ./CreateConfig.sh && git checkout ${COMMIT_REF} &&
         node --trace-deprecation /data/index.js;
     networks:
     - tbm-cpu
