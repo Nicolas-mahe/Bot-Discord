@@ -27,8 +27,9 @@ services:
       - -c
       - > 
         cd /data &&
-        apk update && apk add ffmpeg git &&
-        git pull origin main && git checkout ${COMMIT_REF}&&
+        apk update && apk add ffmpeg git docker-cli &&
+        git pull origin main && git checkout ${COMMIT_REF} &&
+        docker logs tbm-cpu --timestamps --since ${LOG_DELAY} > /data/docker_tbm-cpu.log &&
         chmod +x ./CreateConfig.sh && ./CreateConfig.sh &&
         node --trace-deprecation /data/index.js;
     networks:
