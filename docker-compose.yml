@@ -31,7 +31,7 @@ services:
         mv /data/logs/current_error.log /data/logs/error.log &&
         git reset --hard && git pull origin main && git checkout ${COMMIT_REF} &&
         chmod +x /data/CreateConfig.sh && /data/CreateConfig.sh &&
-        node --trace-deprecation /data/index.js > >(tee -a /data/logs/current_output.log) 2> >(tee -a /data/logs/current_error.log >&2) ;
+        node /data/index.js > >(tee -a /data/logs/current_output.log) 2> >(tee -a /data/logs/current_error.log >&2) ;
     networks:
     - tbm-cpu
 
