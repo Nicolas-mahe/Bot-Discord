@@ -7,4 +7,4 @@ fi
 
 mkdir -p /data/logs && touch /data/logs/current_output.log /data/logs/current_error.log &&
 mv /data/logs/current_output.log /data/logs/output.log &&
-mv /data/logs/current_error.log /data/logs/error.log &&
+mv /data/logs/current_error.log /data/logs/error.log
