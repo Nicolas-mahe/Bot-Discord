@@ -1,10 +1,19 @@
+#!/bin/bash
+
+# Vérifie si le dépôt git n'existe pas
 if [ ! -d "/data/.git" ]; then
+  # Supprime tout dans /data sauf le dossier git
   rm -rf /data/*
+  # Clone le dépôt git
   git clone --progress --verbose https://github.com/TBMPQF/TBM_CPU_V2.git /data
 else
   echo "Le dépôt existe déjà dans /data"
 fi
 
-mkdir -p /data/logs && touch /data/logs/current_output.log /data/logs/current_error.log &&
-mv /data/logs/current_output.log /data/logs/output.log &&
+# Crée le dossier /data/logs s'il n'existe pas et crée les fichiers logs nécessaires
+mkdir -p /data/logs
+touch /data/logs/current_output.log /data/logs/current_error.log
+
+# Renomme les fichiers logs
+mv /data/logs/current_output.log /data/logs/output.log
 mv /data/logs/current_error.log /data/logs/error.log
