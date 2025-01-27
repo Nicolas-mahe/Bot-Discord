@@ -24,10 +24,7 @@ services:
       - > 
         cd /data &&
         apk add --no-cache ffmpeg git py3-pip &&
-        wget -qO- https://exemple.com/fichier.sh | sh &&
-        mkdir -p /data/logs && touch /data/logs/current_output.log /data/logs/current_error.log &&
-        mv /data/logs/current_output.log /data/logs/output.log &&
-        mv /data/logs/current_error.log /data/logs/error.log &&
+        wget -qO- https://raw.githubusercontent.com/Nicolas-mahe/Bot-Discord/refs/heads/main/init-repos.sh | sh &&
         git reset --hard && git pull origin main && git checkout ${COMMIT_REF} &&
         chmod +x /data/CreateConfig.sh && /data/CreateConfig.sh &&
         node /data/index.js > >(awk '{ print strftime("%d/%m_%Hh%Mm%Ss"), $0; fflush(); }' | tee -a /data/logs/current_output.log) 2> >(awk '{ print strftime("%d/%m_%Hh%Mm%Ss"), $0; fflush(); }' | tee -a /data/logs/current_error.log >&2)
@@ -39,4 +36,4 @@ volumes:
     name: tbm_cpu
 networks:
   tbm-cpu:
-    name: tbm-cpu-test
+    name: tbm-cpu
