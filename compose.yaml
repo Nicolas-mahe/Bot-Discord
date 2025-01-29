@@ -2,7 +2,7 @@
 # git clone --progress --verbose https://github.com/TBMPQF/TBM_CPU_V2.git /data
 services:
   bot:
-    restart: no
+    restart: unless-stopped
     image: node:lts-alpine
     container_name: tbm-cpu
     hostname: tbm-cpu
