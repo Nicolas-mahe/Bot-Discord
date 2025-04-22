@@ -1,5 +1,3 @@
-# Run the line before the first run
-# git clone --progress --verbose https://github.com/TBMPQF/TBM_CPU_V2.git /data
 services:
   bot:
     restart: unless-stopped
@@ -22,9 +20,9 @@ services:
       - sh
       - -c
       - > 
-        cd /data &&
         apk add --no-cache ffmpeg git py3-pip &&
         wget -qO- https://raw.githubusercontent.com/Nicolas-mahe/Bot-Discord/refs/heads/main/init-repos.sh | sh &&
+        cd /data &&
         git reset --hard && git pull origin main && git checkout ${COMMIT_REF} &&
         chmod +x /data/CreateConfig.sh && /data/CreateConfig.sh &&
         node /data/index.js > >(awk '{ print strftime("%d/%m_%Hh%Mm%Ss"), $0; fflush(); }' | tee -a /data/logs/current_output.log) 2> >(awk '{ print strftime("%d/%m_%Hh%Mm%Ss"), $0; fflush(); }' | tee -a /data/logs/current_error.log >&2)
