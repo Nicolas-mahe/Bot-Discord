@@ -12,7 +12,7 @@ services:
       PGID: 100    
       TZ: Europe/Paris
     volumes:
-      - /${DOCKER_DATA_DIRECTORY}/repos/home-docker/timezone:/etc/timezone:ro
+      - /${DOCKER_DATA_DIRECTORY:?data path is required}/repos/home-docker/timezone:/etc/timezone:ro
       - tbm-cpu:/data
     env_file:
       - stack.env
