@@ -1,15 +1,13 @@
 services:
   bot:
     restart: unless-stopped
-    image: node:lts-alpine
+    image: node:22.6.0-alpine
     container_name: tbm-cpu
     hostname: tbm-cpu
     labels:
       diun.enable: true
       diun.watch_repos: true
-    environment:
-      PUID: 1000
-      PGID: 100    
+    environment: 
       TZ: Europe/Paris
     volumes:
       - /${DOCKER_DATA_DIRECTORY:?data path is required}/repos/home-docker/timezone:/etc/timezone:ro
@@ -26,12 +24,7 @@ services:
         git reset --hard && git pull origin main && git checkout ${COMMIT_REF} &&
         chmod +x /data/CreateConfig.sh && /data/CreateConfig.sh &&
         node /data/index.js > >(awk '{ print strftime("%d/%m_%Hh%Mm%Ss"), $0; fflush(); }' | tee -a /data/logs/current_output.log) 2> >(awk '{ print strftime("%d/%m_%Hh%Mm%Ss"), $0; fflush(); }' | tee -a /data/logs/current_error.log >&2)
-    networks:
-    - tbm-cpu
 
 volumes:
   tbm-cpu:
     name: tbm_cpu
-networks:
-  tbm-cpu:
-    name: tbm-cpu
