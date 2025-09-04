@@ -1,7 +1,7 @@
 # Bot-Discord
-image docker to run TBMPQF bot Discord
+Docker image to run [TBMPQF bot Discord](https://github.com/TBMPQF/TBM_CPU_V2.git)
 
-https://github.com/TBMPQF/TBM_CPU_V2.git
+**Now is deprecated, use TBM_CPU_V2 instead** Project have is own packaging now
 
 ## CreateScript.sh
 

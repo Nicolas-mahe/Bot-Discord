@@ -9,11 +9,3 @@ if [ ! -d "/data/.git" ]; then
 else
   echo "Le dépôt existe déjà dans /data"
 fi
-
-# Crée le dossier /data/logs s'il n'existe pas et crée les fichiers logs nécessaires
-mkdir -p /data/logs
-touch /data/logs/current_output.log /data/logs/current_error.log
-
-# Renomme les anciens fichiers logs
-mv /data/logs/current_output.log /data/logs/output.log
-mv /data/logs/current_error.log /data/logs/error.log
