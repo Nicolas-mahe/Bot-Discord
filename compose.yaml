@@ -12,7 +12,7 @@ services:
     volumes:
       - tbm-cpu:/data
     env_file:
-      - .stack.env
+      - stack.env
     command:
       - sh
       - -c
