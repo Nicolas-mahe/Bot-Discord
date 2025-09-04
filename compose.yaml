@@ -1,6 +1,6 @@
 services:
   bot:
-    restart: no
+    restart: unless-stopped
     image: node:22.6.0-alpine
     container_name: tbm-cpu
     hostname: tbm-cpu
@@ -12,7 +12,7 @@ services:
     volumes:
       - tbm-cpu:/data
     env_file:
-      - .env
+      - .stack.env
     command:
       - sh
       - -c
